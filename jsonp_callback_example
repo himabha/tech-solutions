@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script>
+$('document').ready(function() {
+	$("#button").click(function(){
+    	var pm_url = 'demo_jsonp.php?callback=myFunc';
+        $.ajax({
+            url: pm_url,
+            dataType: 'jsonp',
+            jsonpCallback: 'myFunc',
+            jsonp: false,
+            success:function(response)
+            {
+                console.log(response);
+            }
+        });
+    })
+    
+});
+</script>
+</head>
+<body>
+
+<h2>Request JSON using the script tag</h2>
+<p>The PHP file returns a call to a function that will handle the JSON data.</p>
+<button id="button">Hello</button>
+<p id="demo"></p>
+
+
+
+</body>
+</html>
+
+
+<?php
+
+$myJSON = '{"name":"John", "age":30, "city":"New York"}';
+
+echo "myFunc(".$myJSON.");";
+
+?>
+
